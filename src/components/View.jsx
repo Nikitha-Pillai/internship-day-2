@@ -1,41 +1,48 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 export const View = () => {
-    const rows = [{Name: 'Maya',Email:'mr@gmail.com',Phone:7878262378},
-        {Name: 'Jiya',Email:'ji@gmail.com',Phone:7878262668},
-        {Name: 'Miya',Email:'jhidi@gmail.com',Phone:7338262378}
-    ]
-  return (
-    <div>
-      <TableContainer style={{marginTop : '20px'}}component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Phone</TableCell>
-           
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.Name}
-              </TableCell>
-              <TableCell align="right">{row.Email}</TableCell>
-              <TableCell align="right">{row.Phone}</TableCell>
-              
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </div>
-  )
-}
+    const [rows, setRows] = useState([]);
+
+    useEffect(() => {
+      axios.get('https://dummyjson.com/users')
+        .then((res) => {
+          setRows(res.data.users);
+        })
+        .catch((error) => {
+          console.error("There was an error fetching the users!", error);
+        });
+    }, []);
+
+    return (
+      <div>
+        <TableContainer style={{ marginTop: '20px' }} component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell align="right">Email</TableCell>
+                <TableCell align="right">Phone</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {Array.isArray(rows) && rows.map((row) => (
+                <TableRow
+                  key={row.id} // Assuming each user has a unique `id`
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.firstName}
+                  </TableCell>
+                  <TableCell align="right">{row.email}</TableCell>
+                  <TableCell align="right">{row.phone}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    );
+};

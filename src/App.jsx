@@ -17,7 +17,11 @@ function App() {
     
      <Routes>
       <Route path='/' element={<View/>}></Route>
-      <Route path='/add' element={<Add/>}></Route>
+      <Route path='/add' element={<Add person= {{ 
+        Name:'Maya',
+      Email:'m@gmail.com',
+      Password:'1234',
+      Address:'Lucknow'}}/>}></Route>
       <Route path='/movie' element={<Movie/>}></Route>
      </Routes>
     </>

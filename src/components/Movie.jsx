@@ -18,8 +18,10 @@ const bull = (
 const Movie = () => {
   return (
     <div>
+      
       <Card sx={{ maxWidth: 300, margin: 'auto' }} style={{marginTop : '20px'}}>
         <CardContent>
+    
       <Typography variant="body2">
             {'Movie'}
           </Typography>
@@ -49,9 +51,13 @@ const Movie = () => {
           <Typography variant="body2">
             {'Starring : Yash Gowda'}
           </Typography>
+          
         </CardContent>
       </Card>
-      <button style={{marginTop : '20px',borderColor:'blue',backgroundColor:'white'}}>Watch</button>
+        <button style={{marginTop : '20px',borderColor:'blue',backgroundColor:'white'}}>Watch</button>
+
+      
+      
     </div>
 
   );
